@@ -128,6 +128,7 @@ namespace AttributeSystemProvider
         public void SetGenre(Genre genre)
         {
             _mediaFile.Tag.Genres = new string[] { genre.GetGenre() };
+            _mediaFile.Save();
         }
 
         #endregion
