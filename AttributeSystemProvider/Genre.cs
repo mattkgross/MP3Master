@@ -25,7 +25,7 @@ namespace AttributeSystemProvider
         {
             string value = "";
 
-            if (!DataEnums.genreOptions.TryGetValue(_genre, out value))
+            if (!DataEnums.genreOptions.TryGetValue(genre, out value))
                 return false;
 
             _genre = value;
