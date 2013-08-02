@@ -13,9 +13,28 @@ namespace AttributeSystemProvider
         public Genre(string genre)
         {
             _genre = genre.ToLower();
+            string value = "";
 
-            if (DataEnums.genreOptions.ContainsKey(_genre))
-                _genre = DataEnums.genreOptions
+            if (!DataEnums.genreOptions.TryGetValue(_genre, out value))
+                _genre = "";
+            else
+                _genre = value;
+        }
+
+        public bool SetGenre(string genre)
+        {
+            string value = "";
+
+            if (!DataEnums.genreOptions.TryGetValue(_genre, out value))
+                return false;
+
+            _genre = value;
+            return true;
+        }
+
+        public string GetGenre()
+        {
+            return _genre;
         }
     }
 }

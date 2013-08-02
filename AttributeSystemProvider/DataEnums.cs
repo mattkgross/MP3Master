@@ -8,7 +8,7 @@ namespace AttributeSystemProvider
 {
     public class DataEnums
     {
-        public static readonly Dictionary<string, string> genreOptions = { 
+        public static readonly Dictionary<string, string> genreOptions = new Dictionary<string,string> { 
             {"alternative", "Alternative"}, {"books & spoken", "Books & Spoken"}, {"christian", "Christian"},
             {"classical", "Classical"}, {"comedy", "Comedy"}, {"country", "Country"}, {"dance", "Dance"},
             {"electronic", "Electronic"}, {"folk", "Folk"}, {"hip-hop/rap", "Hip-Hop/Rap"}, {"indie", "Indie"},
