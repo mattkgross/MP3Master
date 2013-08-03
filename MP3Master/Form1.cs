@@ -16,6 +16,7 @@ namespace MP3Master
     {
         private static string exportDirectory;
         private static string sourceDirectory;
+        private static bool recurseDirectory;
 
         public Main_Form()
         {
@@ -24,6 +25,7 @@ namespace MP3Master
 
         private void Main_Form_Load(object sender, EventArgs e)
         {
+            recurseDirectory = subdirectoryCheckBox.Checked;
             schemaBox1.Items.AddRange(DataEnums.schemaOptions);
             schemaBox2.Items.AddRange(DataEnums.schemaOptions);
         }
@@ -95,6 +97,11 @@ namespace MP3Master
         {
             Updater();
         }
+
+        private void subdirectoryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            recurseDirectory = subdirectoryCheckBox.Checked;
+        }
         #endregion
 
         #region Hierarchy Schema
@@ -115,6 +122,22 @@ namespace MP3Master
         }
         #endregion
 
+        private List<DirectoryInfo> recurseDirectoryAdd(string root)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(root);
+            List<DirectoryInfo> retDir = new List<DirectoryInfo>() { dirInfo };
+
+            if (dirInfo.EnumerateDirectories().Count() == 0)
+                return retDir;
+
+            foreach (var dir in dirInfo.EnumerateDirectories())
+            {
+                retDir.Concat(recurseDirectoryAdd(dir.FullName));
+            }
+
+            return retDir;
+        }
+
         private void submitButton_Click(object sender, EventArgs e)
         {
             if (!Validater())
@@ -122,6 +145,19 @@ namespace MP3Master
 
             musicProgressLabel.Visible = true;
             musicProgressBar.Visible = true;
+
+            List<DirectoryInfo> sourceDirectories;
+            if (recurseDirectory)
+            {
+                sourceDirectories = recurseDirectoryAdd(sourceDirectory);
+            }
+            else
+            {
+                sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(sourceDirectory) };
+            }
+
+
+            this.Close();
         }
     }
 }

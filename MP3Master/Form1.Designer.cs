@@ -205,12 +205,13 @@
             // subdirectoryCheckBox
             // 
             this.subdirectoryCheckBox.AutoSize = true;
-            this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 35);
+            this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 138);
             this.subdirectoryCheckBox.Name = "subdirectoryCheckBox";
             this.subdirectoryCheckBox.Size = new System.Drawing.Size(131, 17);
             this.subdirectoryCheckBox.TabIndex = 15;
             this.subdirectoryCheckBox.Text = "Include Subdirectories";
             this.subdirectoryCheckBox.UseVisualStyleBackColor = true;
+            this.subdirectoryCheckBox.CheckedChanged += new System.EventHandler(this.subdirectoryCheckBox_CheckedChanged);
             // 
             // Main_Form
             // 
