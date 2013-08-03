@@ -44,6 +44,8 @@
             this.sourceDirectoryBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.submitButton = new System.Windows.Forms.Button();
             this.musicProgressBar = new System.Windows.Forms.ProgressBar();
+            this.musicProgressLabel = new System.Windows.Forms.Label();
+            this.subdirectoryCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // exportDirectoryLabel
@@ -187,9 +189,28 @@
             this.musicProgressBar.Location = new System.Drawing.Point(146, 181);
             this.musicProgressBar.Name = "musicProgressBar";
             this.musicProgressBar.Size = new System.Drawing.Size(283, 23);
-            this.musicProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.musicProgressBar.TabIndex = 13;
             this.musicProgressBar.Visible = false;
+            // 
+            // musicProgressLabel
+            // 
+            this.musicProgressLabel.AutoSize = true;
+            this.musicProgressLabel.Location = new System.Drawing.Point(143, 165);
+            this.musicProgressLabel.Name = "musicProgressLabel";
+            this.musicProgressLabel.Size = new System.Drawing.Size(51, 13);
+            this.musicProgressLabel.TabIndex = 14;
+            this.musicProgressLabel.Text = "Progress:";
+            this.musicProgressLabel.Visible = false;
+            // 
+            // subdirectoryCheckBox
+            // 
+            this.subdirectoryCheckBox.AutoSize = true;
+            this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 35);
+            this.subdirectoryCheckBox.Name = "subdirectoryCheckBox";
+            this.subdirectoryCheckBox.Size = new System.Drawing.Size(131, 17);
+            this.subdirectoryCheckBox.TabIndex = 15;
+            this.subdirectoryCheckBox.Text = "Include Subdirectories";
+            this.subdirectoryCheckBox.UseVisualStyleBackColor = true;
             // 
             // Main_Form
             // 
@@ -197,6 +218,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(445, 219);
+            this.Controls.Add(this.subdirectoryCheckBox);
+            this.Controls.Add(this.musicProgressLabel);
             this.Controls.Add(this.musicProgressBar);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.sourceDirectoryButton);
@@ -238,6 +261,8 @@
         private System.Windows.Forms.FolderBrowserDialog sourceDirectoryBrowser;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.ProgressBar musicProgressBar;
+        private System.Windows.Forms.Label musicProgressLabel;
+        private System.Windows.Forms.CheckBox subdirectoryCheckBox;
     }
 }
 

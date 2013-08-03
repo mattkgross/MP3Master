@@ -24,17 +24,48 @@ namespace MP3Master
 
         private void Main_Form_Load(object sender, EventArgs e)
         {
-            exportDirectory = exportDirectoryBrowser.RootFolder.ToString();
             schemaBox1.Items.AddRange(DataEnums.schemaOptions);
             schemaBox2.Items.AddRange(DataEnums.schemaOptions);
         }
 
+        #region State Change Handlers
         private void Updater()
         {
             exportDirectory = exportDirectoryTextBox.Text;
             sourceDirectory = sourceDirectoryTextBox.Text;
         }
 
+        private bool Validater()
+        {
+            if (String.IsNullOrEmpty(exportDirectory))
+            {
+                MessageBox.Show("Please specify a directory to where you would like to export your files.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (schemaBox1.SelectedIndex == -1 || schemaBox2.SelectedIndex == -1 || schemaBox3.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please fully configure your desired organization schema.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (String.IsNullOrEmpty(sourceDirectory))
+            {
+                MessageBox.Show("Please specify a directory that contains your music files.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (exportDirectory.Equals(sourceDirectory))
+            {
+                MessageBox.Show("Export and source directory cannot be the same!", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
+
+        #region Directory Selectors
         private void exportDirectoryButton_Click(object sender, EventArgs e)
         {
             if (exportDirectoryBrowser.ShowDialog() == DialogResult.OK)
@@ -48,22 +79,6 @@ namespace MP3Master
         private void exportDirectoryTextBox_TextChanged(object sender, EventArgs e)
         {
             Updater();
-        }
-
-        private void schemaBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (schemaBox1.SelectedIndex == schemaBox2.SelectedIndex)
-            {
-                schemaBox2.SelectedIndex = -1;
-            }
-        }
-
-        private void schemaBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (schemaBox2.SelectedIndex == schemaBox1.SelectedIndex)
-            {
-                schemaBox1.SelectedIndex = -1;
-            }
         }
 
         private void sourceDirectoryButton_Click(object sender, EventArgs e)
@@ -80,10 +95,33 @@ namespace MP3Master
         {
             Updater();
         }
+        #endregion
+
+        #region Hierarchy Schema
+        private void schemaBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (schemaBox1.SelectedIndex == schemaBox2.SelectedIndex)
+            {
+                schemaBox2.SelectedIndex = -1;
+            }
+        }
+
+        private void schemaBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (schemaBox2.SelectedIndex == schemaBox1.SelectedIndex)
+            {
+                schemaBox1.SelectedIndex = -1;
+            }
+        }
+        #endregion
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            if (!Validater())
+                return;
 
+            musicProgressLabel.Visible = true;
+            musicProgressBar.Visible = true;
         }
     }
 }
