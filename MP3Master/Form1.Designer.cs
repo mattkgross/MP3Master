@@ -43,6 +43,7 @@
             this.sourceDirectoryButton = new System.Windows.Forms.Button();
             this.sourceDirectoryBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.submitButton = new System.Windows.Forms.Button();
+            this.musicProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // exportDirectoryLabel
@@ -181,12 +182,22 @@
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
+            // musicProgressBar
+            // 
+            this.musicProgressBar.Location = new System.Drawing.Point(146, 181);
+            this.musicProgressBar.Name = "musicProgressBar";
+            this.musicProgressBar.Size = new System.Drawing.Size(283, 23);
+            this.musicProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.musicProgressBar.TabIndex = 13;
+            this.musicProgressBar.Visible = false;
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(445, 219);
+            this.Controls.Add(this.musicProgressBar);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.sourceDirectoryButton);
             this.Controls.Add(this.sourceDirectoryTextBox);
@@ -226,6 +237,7 @@
         private System.Windows.Forms.Button sourceDirectoryButton;
         private System.Windows.Forms.FolderBrowserDialog sourceDirectoryBrowser;
         private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.ProgressBar musicProgressBar;
     }
 }
 
