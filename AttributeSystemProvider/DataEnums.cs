@@ -15,5 +15,7 @@ namespace AttributeSystemProvider
             {"mashup", "Mashup"}, {"metal", "Metal"}, {"new age", "New Age"}, {"pop", "Pop"},
             {"pop latino", "Pop Latino"}, {"r&b/soul", "R&B/Soul"}, {"rock", "Rock"},
             {"singer/songwriter", "Singer/Songwriter"}, {"soundtrack", "Soundtrack"}, {"world", "World"} };
+
+        public static readonly string[] schemaOptions = { "Album", "Artist" };
     }
 }
