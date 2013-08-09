@@ -230,6 +230,8 @@ namespace MP3Master
                 sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(sourceDirectory) };
             }
 
+            musicProgressBar.Visible = true;
+
             foreach (var dir in sourceDirectories)
             {
                 foreach (var file in dir.EnumerateFiles())
@@ -245,6 +247,8 @@ namespace MP3Master
                     StructuredMove(file);
                 }
             }
+
+            MessageBox.Show("All songs successfully organized.");
 
             this.Close();
         }

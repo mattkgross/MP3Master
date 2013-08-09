@@ -186,6 +186,7 @@
             this.musicProgressBar.Location = new System.Drawing.Point(146, 211);
             this.musicProgressBar.Name = "musicProgressBar";
             this.musicProgressBar.Size = new System.Drawing.Size(283, 23);
+            this.musicProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.musicProgressBar.TabIndex = 13;
             this.musicProgressBar.Visible = false;
             // 
