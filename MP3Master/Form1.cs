@@ -143,7 +143,8 @@ namespace MP3Master
 
         private void UpdateTags(MP3File file)
         {
-
+            Form2 form2 = new Form2();
+            form2.Show();
         }
 
         private string StructureName(string name, MP3File mp3)
