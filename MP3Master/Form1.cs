@@ -157,7 +157,7 @@ namespace MP3Master
             string schemaName2 = "";
 
             // Reflect mp3 type
-            Type mp3Type = Type.GetType("AttributeSystemProvider.MP3File");
+            Type mp3Type = mp3.GetType();
             string temp = "";
 
             // Get the function associated with the 1st schema option
@@ -165,7 +165,7 @@ namespace MP3Master
             MethodInfo method1 = mp3Type.GetMethod(temp);
             // Use reflection to call the proper GET method associated with the schema
             // to return the string name of the directory we are looking for
-            schemaName1 = method1.Invoke(mp3, null) as string;
+            schemaName1 = (method1.Invoke(mp3, null) as string) == null ? "Unknown" : method1.Invoke(mp3, null) as string;
 
             // Create 1st schema directory if it doesn't already exist
             if(dir.GetDirectories(schemaName1).Length == 0)
@@ -176,12 +176,13 @@ namespace MP3Master
             MethodInfo method2 = mp3Type.GetMethod(temp);
             // Use reflection to call the proper GET method associated with the schema
             // to return the string name of the directory we are looking for
-            schemaName2 = method2.Invoke(mp3, null) as string;
+            schemaName2 = (method2.Invoke(mp3, null) as string) == null ? "Unknown" : method2.Invoke(mp3, null) as string;
 
             // Create 2nd schema directory if it doesn't already exist
+            if (!Directory.Exists(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2))
+                Directory.CreateDirectory(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2);
 
-
-            File.Move(file.FullName, exportDirectory + "\\" + file.Name);
+            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + file.Name);
         }
 
         private void submitButton_Click(object sender, EventArgs e)
