@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttributeSystemProvider;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace MP3Master
 {
     public partial class Form2 : Form
     {
+        private MP3File mp3 = null;
+
         public Form2()
         {
             InitializeComponent();
@@ -19,7 +22,16 @@ namespace MP3Master
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            if (mp3 == null)
+            {
+                MessageBox.Show("MP3 file pointer not found.", "MP3 Tag Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
 
+        public void LoadMP3(MP3File file)
+        {
+            mp3 = file;
         }
 
         private void saveTagsButton_Click(object sender, EventArgs e)
