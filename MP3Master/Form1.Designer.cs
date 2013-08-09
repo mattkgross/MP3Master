@@ -116,10 +116,6 @@
             this.schemaBox3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.schemaBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.schemaBox3.FormattingEnabled = true;
-            this.schemaBox3.Items.AddRange(new object[] {
-            "Original Name",
-            "Track # - Song Title",
-            "Song Title"});
             this.schemaBox3.Location = new System.Drawing.Point(308, 81);
             this.schemaBox3.Name = "schemaBox3";
             this.schemaBox3.Size = new System.Drawing.Size(121, 21);

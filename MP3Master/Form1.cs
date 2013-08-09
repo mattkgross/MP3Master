@@ -30,6 +30,7 @@ namespace MP3Master
             recurseDirectory = subdirectoryCheckBox.Checked;
             schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox2.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
+            schemaBox3.Items.AddRange(DataEnums.songOptions.Keys.ToArray());
         }
 
         #region State Change Handlers
@@ -145,6 +146,32 @@ namespace MP3Master
 
         }
 
+        private string StructureName(string name, MP3File mp3)
+        {
+            DataEnums.songName type;
+            DataEnums.songOptions.TryGetValue(schemaBox3.SelectedItem as string, out type);
+
+            switch (type)
+            {
+                case DataEnums.songName.Original_Name:
+                    break;
+                case DataEnums.songName.Track_Title:
+                    uint track = mp3.GetTrackNumber();
+                    string part1 = (track == 0) ? "" : (track.ToString() + " - ");
+                    string part2 = string.IsNullOrEmpty(mp3.GetTrackName()) ? name : mp3.GetTrackName();
+                    name = part1 + part2;
+                    break;
+                case DataEnums.songName.Song_Title:
+                    name = string.IsNullOrEmpty(mp3.GetTrackName()) ? name : mp3.GetTrackName();;
+                    break;
+                default:
+                    MessageBox.Show("Song name format type not found. Defaulting to no change.", "Song Name Format Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    break;
+            }
+
+            return name;
+        }
+
         private void StructuredMove(FileInfo file)
         {
             DirectoryInfo dir = new DirectoryInfo(exportDirectory);
@@ -182,7 +209,7 @@ namespace MP3Master
             if (!Directory.Exists(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2))
                 Directory.CreateDirectory(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2);
 
-            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + file.Name);
+            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3));
         }
 
         private void submitButton_Click(object sender, EventArgs e)

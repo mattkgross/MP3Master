@@ -22,5 +22,12 @@ namespace AttributeSystemProvider
         public static readonly Dictionary<string, string> schemaOptions = new Dictionary<string, string> {
             {"Artist", "GetFirstArtist"}, {"Album", "GetAlbum"}
         };
+
+        // Lists all song name options - BE SURE TO ADD A SWITCH STATEMENT CASE TO Form1.StructuredMove FOR ANY YOU ADD
+        public enum songName { Original_Name, Track_Title, Song_Title };
+        public static readonly Dictionary<string, songName> songOptions = new Dictionary<string, songName> {
+            {"Original Name", songName.Original_Name}, {"Track # - Song Title", songName.Track_Title},
+            {"Song Title", songName.Song_Title}
+        };
     }
 }
