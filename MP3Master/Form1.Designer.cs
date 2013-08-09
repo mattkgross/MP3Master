@@ -46,6 +46,7 @@
             this.musicProgressBar = new System.Windows.Forms.ProgressBar();
             this.musicProgressLabel = new System.Windows.Forms.Label();
             this.subdirectoryCheckBox = new System.Windows.Forms.CheckBox();
+            this.editTagsBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // exportDirectoryLabel
@@ -176,7 +177,7 @@
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(16, 181);
+            this.submitButton.Location = new System.Drawing.Point(16, 211);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(94, 23);
             this.submitButton.TabIndex = 12;
@@ -186,7 +187,7 @@
             // 
             // musicProgressBar
             // 
-            this.musicProgressBar.Location = new System.Drawing.Point(146, 181);
+            this.musicProgressBar.Location = new System.Drawing.Point(146, 211);
             this.musicProgressBar.Name = "musicProgressBar";
             this.musicProgressBar.Size = new System.Drawing.Size(283, 23);
             this.musicProgressBar.TabIndex = 13;
@@ -195,7 +196,7 @@
             // musicProgressLabel
             // 
             this.musicProgressLabel.AutoSize = true;
-            this.musicProgressLabel.Location = new System.Drawing.Point(143, 165);
+            this.musicProgressLabel.Location = new System.Drawing.Point(143, 195);
             this.musicProgressLabel.Name = "musicProgressLabel";
             this.musicProgressLabel.Size = new System.Drawing.Size(51, 13);
             this.musicProgressLabel.TabIndex = 14;
@@ -205,6 +206,7 @@
             // subdirectoryCheckBox
             // 
             this.subdirectoryCheckBox.AutoSize = true;
+            this.subdirectoryCheckBox.Enabled = false;
             this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 138);
             this.subdirectoryCheckBox.Name = "subdirectoryCheckBox";
             this.subdirectoryCheckBox.Size = new System.Drawing.Size(131, 17);
@@ -213,12 +215,24 @@
             this.subdirectoryCheckBox.UseVisualStyleBackColor = true;
             this.subdirectoryCheckBox.CheckedChanged += new System.EventHandler(this.subdirectoryCheckBox_CheckedChanged);
             // 
+            // editTagsBox
+            // 
+            this.editTagsBox.AutoSize = true;
+            this.editTagsBox.Location = new System.Drawing.Point(16, 171);
+            this.editTagsBox.Name = "editTagsBox";
+            this.editTagsBox.Size = new System.Drawing.Size(221, 17);
+            this.editTagsBox.TabIndex = 16;
+            this.editTagsBox.Text = "Prompt me to fill in missing data for songs.";
+            this.editTagsBox.UseVisualStyleBackColor = true;
+            this.editTagsBox.CheckedChanged += new System.EventHandler(this.editTagsBox_CheckedChanged);
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(445, 219);
+            this.ClientSize = new System.Drawing.Size(445, 246);
+            this.Controls.Add(this.editTagsBox);
             this.Controls.Add(this.subdirectoryCheckBox);
             this.Controls.Add(this.musicProgressLabel);
             this.Controls.Add(this.musicProgressBar);
@@ -264,6 +278,7 @@
         private System.Windows.Forms.ProgressBar musicProgressBar;
         private System.Windows.Forms.Label musicProgressLabel;
         private System.Windows.Forms.CheckBox subdirectoryCheckBox;
+        private System.Windows.Forms.CheckBox editTagsBox;
     }
 }
 

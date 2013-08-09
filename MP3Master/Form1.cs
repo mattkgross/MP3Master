@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +18,7 @@ namespace MP3Master
         private static string exportDirectory;
         private static string sourceDirectory;
         private static bool recurseDirectory;
+        private static bool songData;
 
         public Main_Form()
         {
@@ -26,8 +28,8 @@ namespace MP3Master
         private void Main_Form_Load(object sender, EventArgs e)
         {
             recurseDirectory = subdirectoryCheckBox.Checked;
-            schemaBox1.Items.AddRange(DataEnums.schemaOptions);
-            schemaBox2.Items.AddRange(DataEnums.schemaOptions);
+            schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
+            schemaBox2.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
         }
 
         #region State Change Handlers
@@ -102,6 +104,11 @@ namespace MP3Master
         {
             recurseDirectory = subdirectoryCheckBox.Checked;
         }
+
+        private void editTagsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            songData = editTagsBox.Checked;
+        }
         #endregion
 
         #region Hierarchy Schema
@@ -120,22 +127,61 @@ namespace MP3Master
                 schemaBox1.SelectedIndex = -1;
             }
         }
-        #endregion
 
         private List<DirectoryInfo> recurseDirectoryAdd(string root)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(root);
-            List<DirectoryInfo> retDir = new List<DirectoryInfo>() { dirInfo };
 
             if (dirInfo.EnumerateDirectories().Count() == 0)
-                return retDir;
+                return new List<DirectoryInfo>() { dirInfo };
 
-            foreach (var dir in dirInfo.EnumerateDirectories())
-            {
-                retDir.Concat(recurseDirectoryAdd(dir.FullName));
-            }
+            // stub until recursing correctly
+            return null;
+        }
+        #endregion
 
-            return retDir;
+        private void UpdateTags(MP3File file)
+        {
+
+        }
+
+        private void StructuredMove(FileInfo file)
+        {
+            DirectoryInfo dir = new DirectoryInfo(exportDirectory);
+            MP3File mp3 = new MP3File(file.FullName);
+            
+            string schema1 = schemaBox1.Text;
+            string schema2 = schemaBox2.Text;
+            string schema3 = schemaBox3.Text;
+            string schemaName1 = "";
+            string schemaName2 = "";
+
+            // Reflect mp3 type
+            Type mp3Type = Type.GetType("AttributeSystemProvider.MP3File");
+            string temp = "";
+
+            // Get the function associated with the 1st schema option
+            DataEnums.schemaOptions.TryGetValue(schema1, out temp);
+            MethodInfo method1 = mp3Type.GetMethod(temp);
+            // Use reflection to call the proper GET method associated with the schema
+            // to return the string name of the directory we are looking for
+            schemaName1 = method1.Invoke(mp3, null) as string;
+
+            // Create 1st schema directory if it doesn't already exist
+            if(dir.GetDirectories(schemaName1).Length == 0)
+                dir.CreateSubdirectory(schemaName1);
+
+            // Get the function associated with the 2nd schema option
+            DataEnums.schemaOptions.TryGetValue(schema2, out temp);
+            MethodInfo method2 = mp3Type.GetMethod(temp);
+            // Use reflection to call the proper GET method associated with the schema
+            // to return the string name of the directory we are looking for
+            schemaName2 = method2.Invoke(mp3, null) as string;
+
+            // Create 2nd schema directory if it doesn't already exist
+
+
+            File.Move(file.FullName, exportDirectory + "\\" + file.Name);
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -156,6 +202,21 @@ namespace MP3Master
                 sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(sourceDirectory) };
             }
 
+            foreach (var dir in sourceDirectories)
+            {
+                foreach (var file in dir.EnumerateFiles())
+                {
+                    if (!file.Extension.Equals(".mp3"))
+                        continue;
+
+                    // Edit tags if elected
+                    if (songData)
+                        UpdateTags(new MP3File(file.FullName));
+
+                    // Move file to destination
+                    StructuredMove(file);
+                }
+            }
 
             this.Close();
         }
