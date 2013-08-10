@@ -27,6 +27,8 @@ namespace MP3Master
                 MessageBox.Show("MP3 file pointer not found.", "MP3 Tag Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
+
+            this.Text += " - " + mp3.GetFile().Name;
         }
 
         public void LoadMP3(MP3File file)

@@ -30,6 +30,7 @@
         {
             this.saveTagsButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.clearOthersCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // saveTagsButton
@@ -52,6 +53,18 @@
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
+            // clearOthersCheckBox
+            // 
+            this.clearOthersCheckBox.AutoSize = true;
+            this.clearOthersCheckBox.Checked = true;
+            this.clearOthersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.clearOthersCheckBox.Location = new System.Drawing.Point(12, 203);
+            this.clearOthersCheckBox.Name = "clearOthersCheckBox";
+            this.clearOthersCheckBox.Size = new System.Drawing.Size(138, 17);
+            this.clearOthersCheckBox.TabIndex = 2;
+            this.clearOthersCheckBox.Text = "Clear all other tag fields.";
+            this.clearOthersCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -59,12 +72,14 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.ControlBox = false;
+            this.Controls.Add(this.clearOthersCheckBox);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.saveTagsButton);
             this.Name = "Form2";
             this.Text = "Edit MP3 Tags";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,5 +87,6 @@
 
         private System.Windows.Forms.Button saveTagsButton;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.CheckBox clearOthersCheckBox;
     }
 }

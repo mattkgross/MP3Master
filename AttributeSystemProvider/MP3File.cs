@@ -15,7 +15,7 @@ namespace AttributeSystemProvider
 
         }
 
-        #region Get Methods
+        #region Track Get Methods
 
         public string GetTrackName()
         {
@@ -69,7 +69,7 @@ namespace AttributeSystemProvider
 
         #endregion
 
-        #region Set Methods
+        #region Track Set Methods
 
         public void SetTrackName(string name)
         {
