@@ -232,8 +232,6 @@ namespace MP3Master
                 sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(sourceDirectory) };
             }
 
-            musicProgressBar.Visible = true;
-
             foreach (var dir in sourceDirectories)
             {
                 foreach (var file in dir.EnumerateFiles())
