@@ -248,6 +248,8 @@
             this.Controls.Add(this.exportDirectoryLabel);
             this.MaximizeBox = false;
             this.Name = "Main_Form";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MP3 Master";
             this.Load += new System.EventHandler(this.Main_Form_Load);
             this.ResumeLayout(false);

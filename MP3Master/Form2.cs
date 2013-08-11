@@ -28,7 +28,24 @@ namespace MP3Master
                 this.Close();
             }
 
-            this.Text += " - " + mp3.GetFile().Name;
+            string name = mp3.GetFile().Name;
+            int start, end;
+            start = name.LastIndexOf("\\") + 1;
+            end = name.LastIndexOf(".") - start;
+            this.Text = name.Substring(start, end);
+
+
+            // Load Pre-existing data into form
+            trackNameTextBox.Text = mp3.GetTrackName();
+            artistTextBox.Text = mp3.GetFirstArtist();
+            albumTextBox.Text = mp3.GetAlbum();
+            yearTextBox.Text = mp3.GetYear() == 0 ? "" : mp3.GetYear().ToString();
+            trackNumberTextBox.Text = mp3.GetTrackNumber() == 0 ? "" : mp3.GetTrackNumber().ToString();
+            trackCountTextBox.Text = mp3.GetTrackCount() == 0 ? "" : mp3.GetTrackCount().ToString();
+            albumNumberTextBox.Text = mp3.GetDiscNumber() == 0 ? "" : mp3.GetDiscNumber().ToString();
+            albumCountTextBox.Text = mp3.GetDiscCount() == 0 ? "" : mp3.GetDiscCount().ToString();
+            genreComboBox.SelectedText = String.IsNullOrEmpty(mp3.GetGenre()) ? "" : new Genre(mp3.GetGenre()).GetGenre();
+            genreComboBox.Items.AddRange(DataEnums.genreOptions.Values.ToArray());
         }
 
         public void LoadMP3(MP3File file)
@@ -38,7 +55,19 @@ namespace MP3Master
 
         private void saveTagsButton_Click(object sender, EventArgs e)
         {
+            if (clearOthersCheckBox.Checked)
+                mp3.ClearAllTags();
+
             // Save Current Data
+            mp3.SetTrackName(trackNameTextBox.Text);
+            mp3.SetArtists(artistTextBox.Text);
+            mp3.SetAlbum(albumTextBox.Text);
+            mp3.SetYear(Convert.ToUInt32(yearTextBox.Text));
+            mp3.SetTrackNumber(Convert.ToUInt32(trackNumberTextBox.Text));
+            mp3.SetTrackCount(Convert.ToUInt32(trackCountTextBox.Text));
+            mp3.SetDiscNumber(Convert.ToUInt32(albumNumberTextBox.Text));
+            mp3.SetDiscCount(Convert.ToUInt32(albumCountTextBox.Text));
+            mp3.SetGenre(new Genre(genreComboBox.SelectedText));
 
             this.Close();
         }

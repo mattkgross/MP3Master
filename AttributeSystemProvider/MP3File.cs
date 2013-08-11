@@ -132,5 +132,11 @@ namespace AttributeSystemProvider
         }
 
         #endregion
+
+        public void ClearAllTags()
+        {
+            _mediaFile.Tag.Clear();
+            _mediaFile.Save();
+        }
     }
 }
