@@ -67,6 +67,16 @@ namespace AttributeSystemProvider
             return _mediaFile.Tag.FirstGenre;
         }
 
+        public uint GetDecibel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPicture GetAlbumArt()
+        {
+            return _mediaFile.Tag.Pictures[0];
+        }
+
         #endregion
 
         #region Track Set Methods
@@ -131,12 +141,22 @@ namespace AttributeSystemProvider
             _mediaFile.Save();
         }
 
+        public void SetDecibelDefault()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAlbumArt(IPicture photo)
+        {
+            _mediaFile.Tag.Pictures = new IPicture[1] { photo };
+        }
+
         #endregion
 
         public void ClearAllTags()
         {
             _mediaFile.Tag.Clear();
             _mediaFile.Save();
-        }
+        } 
     }
 }

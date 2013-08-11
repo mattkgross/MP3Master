@@ -211,7 +211,7 @@ namespace MP3Master
             if (!Directory.Exists(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2))
                 Directory.CreateDirectory(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2);
 
-            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3));
+            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3) + ".mp3");
         }
 
         private void submitButton_Click(object sender, EventArgs e)

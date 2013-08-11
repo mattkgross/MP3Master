@@ -210,6 +210,7 @@
             this.subdirectoryCheckBox.TabIndex = 15;
             this.subdirectoryCheckBox.Text = "Include Subdirectories";
             this.subdirectoryCheckBox.UseVisualStyleBackColor = true;
+            this.subdirectoryCheckBox.Visible = false;
             this.subdirectoryCheckBox.CheckedChanged += new System.EventHandler(this.subdirectoryCheckBox_CheckedChanged);
             // 
             // editTagsBox

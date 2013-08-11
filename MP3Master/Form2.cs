@@ -62,11 +62,11 @@ namespace MP3Master
             mp3.SetTrackName(trackNameTextBox.Text);
             mp3.SetArtists(artistTextBox.Text);
             mp3.SetAlbum(albumTextBox.Text);
-            mp3.SetYear(Convert.ToUInt32(yearTextBox.Text));
-            mp3.SetTrackNumber(Convert.ToUInt32(trackNumberTextBox.Text));
-            mp3.SetTrackCount(Convert.ToUInt32(trackCountTextBox.Text));
-            mp3.SetDiscNumber(Convert.ToUInt32(albumNumberTextBox.Text));
-            mp3.SetDiscCount(Convert.ToUInt32(albumCountTextBox.Text));
+            mp3.SetYear(String.IsNullOrEmpty(yearTextBox.Text) ? 0 : Convert.ToUInt32(yearTextBox.Text));
+            mp3.SetTrackNumber(String.IsNullOrEmpty(trackNumberTextBox.Text) ? 0 : Convert.ToUInt32(trackNumberTextBox.Text));
+            mp3.SetTrackCount(String.IsNullOrEmpty(trackCountTextBox.Text) ? 0 : Convert.ToUInt32(trackCountTextBox.Text));
+            mp3.SetDiscNumber(String.IsNullOrEmpty(albumNumberTextBox.Text) ? 0 : Convert.ToUInt32(albumNumberTextBox.Text));
+            mp3.SetDiscCount(String.IsNullOrEmpty(albumCountTextBox.Text) ? 0 : Convert.ToUInt32(albumCountTextBox.Text));
             mp3.SetGenre(new Genre(genreComboBox.SelectedText));
 
             this.Close();
