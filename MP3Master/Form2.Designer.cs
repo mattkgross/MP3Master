@@ -50,12 +50,13 @@
             this.genreLabel = new System.Windows.Forms.Label();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.albumArtPictureBox = new System.Windows.Forms.PictureBox();
+            this.albumArtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.albumArtPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // saveTagsButton
             // 
-            this.saveTagsButton.Location = new System.Drawing.Point(58, 316);
+            this.saveTagsButton.Location = new System.Drawing.Point(58, 331);
             this.saveTagsButton.Name = "saveTagsButton";
             this.saveTagsButton.Size = new System.Drawing.Size(75, 23);
             this.saveTagsButton.TabIndex = 0;
@@ -65,7 +66,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(150, 316);
+            this.closeButton.Location = new System.Drawing.Point(150, 331);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 1;
@@ -78,7 +79,7 @@
             this.clearOthersCheckBox.AutoSize = true;
             this.clearOthersCheckBox.Checked = true;
             this.clearOthersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 293);
+            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 308);
             this.clearOthersCheckBox.Name = "clearOthersCheckBox";
             this.clearOthersCheckBox.Size = new System.Drawing.Size(138, 17);
             this.clearOthersCheckBox.TabIndex = 2;
@@ -239,22 +240,34 @@
             // albumArtPictureBox
             // 
             this.albumArtPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.albumArtPictureBox.ErrorImage = null;
+            this.albumArtPictureBox.ErrorImage = global::MP3Master.Properties.Resources.noart;
+            this.albumArtPictureBox.Image = global::MP3Master.Properties.Resources.noart;
             this.albumArtPictureBox.InitialImage = global::MP3Master.Properties.Resources.noart;
-            this.albumArtPictureBox.Location = new System.Drawing.Point(157, 205);
+            this.albumArtPictureBox.Location = new System.Drawing.Point(157, 221);
             this.albumArtPictureBox.Name = "albumArtPictureBox";
             this.albumArtPictureBox.Size = new System.Drawing.Size(115, 82);
             this.albumArtPictureBox.TabIndex = 21;
             this.albumArtPictureBox.TabStop = false;
             this.albumArtPictureBox.WaitOnLoad = true;
             // 
+            // albumArtButton
+            // 
+            this.albumArtButton.Location = new System.Drawing.Point(15, 259);
+            this.albumArtButton.Name = "albumArtButton";
+            this.albumArtButton.Size = new System.Drawing.Size(127, 23);
+            this.albumArtButton.TabIndex = 22;
+            this.albumArtButton.Text = "Browse for Album Art...";
+            this.albumArtButton.UseVisualStyleBackColor = true;
+            this.albumArtButton.Click += new System.EventHandler(this.albumArtButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(284, 352);
+            this.ClientSize = new System.Drawing.Size(284, 364);
             this.ControlBox = false;
+            this.Controls.Add(this.albumArtButton);
             this.Controls.Add(this.albumArtPictureBox);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.genreLabel);
@@ -311,5 +324,6 @@
         private System.Windows.Forms.Label genreLabel;
         private System.Windows.Forms.ComboBox genreComboBox;
         private System.Windows.Forms.PictureBox albumArtPictureBox;
+        private System.Windows.Forms.Button albumArtButton;
     }
 }

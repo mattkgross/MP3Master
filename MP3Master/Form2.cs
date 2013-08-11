@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TagLib;
 
 namespace MP3Master
 {
@@ -46,6 +47,11 @@ namespace MP3Master
             albumCountTextBox.Text = mp3.GetDiscCount() == 0 ? "" : mp3.GetDiscCount().ToString();
             genreComboBox.SelectedText = String.IsNullOrEmpty(mp3.GetGenre()) ? "" : new Genre(mp3.GetGenre()).GetGenre();
             genreComboBox.Items.AddRange(DataEnums.genreOptions.Values.ToArray());
+
+            if (mp3.GetAlbumArt() != null)
+            {
+                UpdatePic();
+            }
         }
 
         public void LoadMP3(MP3File file)
@@ -75,6 +81,42 @@ namespace MP3Master
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UpdatePic(Image picPath)
+        {
+            try
+            {
+                Size size = new Size(albumArtPictureBox.Width, albumArtPictureBox.Height);
+                albumArtPictureBox.Image = new Bitmap(picPath, size) as Image;
+            }
+            catch
+            {
+                albumArtPictureBox.Image = MP3Master.Properties.Resources.noart;
+            }
+        }
+
+        private void albumArtButton_Click(object sender, EventArgs e)
+        {
+            FileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "JPEG (*.jpeg;*.jpg;*.jpe)|*.jpeg;*.jpg;*.jpe|PNG (*.png)|*.png|All files (*.*)|*.*";
+            dialog.FilterIndex = 3;
+            dialog.CheckFileExists = true;
+            dialog.RestoreDirectory = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    IPicture pic = new Picture(dialog.FileName);
+                    mp3.SetAlbumArt(pic);
+                    UpdatePic(Image.FromFile(dialog.FileName));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Album Art Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
