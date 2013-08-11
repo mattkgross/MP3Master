@@ -149,6 +149,7 @@ namespace AttributeSystemProvider
         public void SetAlbumArt(IPicture photo)
         {
             _mediaFile.Tag.Pictures = new IPicture[1] { photo };
+            _mediaFile.Save();
         }
 
         #endregion
