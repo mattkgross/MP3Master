@@ -15,10 +15,7 @@ namespace AttributeSystemProvider
             _genre = genre.ToLower();
             string value = "";
 
-            if (!DataEnums.genreOptions.TryGetValue(_genre, out value))
-                _genre = "";
-            else
-                _genre = value;
+            _genre = !DataEnums.genreOptions.TryGetValue(_genre, out value) ? "" : value;
         }
 
         public bool SetGenre(string genre)

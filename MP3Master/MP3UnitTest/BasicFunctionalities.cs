@@ -1,32 +1,51 @@
-﻿using System;
+﻿using AttributeSystemProvider;
+using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace MP3UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class BasicFunctionalities
     {
-        private string path;
+        private DirectoryInfo _testDir;
+        private string _path;
+        private MP3File _mp3;
 
-        [TestInitialize]
-        private void Initialization()
+        [SetUp]
+        public void Init()
         {
-            // TODO: Create a fake mp3 file w/ attributes.
-            path = Directory.GetCurrentDirectory() + "\\test.mp3";
-            File.Create(path);
+            // Create Test Directory w/ Empty File
+            _testDir = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Test");
+            _path = Directory.GetCurrentDirectory() + "\\Test\\test.mp3";
+            File.Create(_path);
+            _mp3 = new MP3File(_path);
         }
 
-        [TestCleanup]
-        private void Cleanup()
+        [TearDown]
+        public void Dispose()
         {
-            File.Delete(path);
+            File.Delete(_path);
+            Directory.Delete(_testDir.FullName);
         }
 
-        [TestMethod]
+        #region MP3 Set Methods
+        [Test]
+        public void SetTrackName_ValidName()
+        {
+            var name = "Test Name";
+            _mp3.SetTrackName(name);
+
+            NUnit.Framework.Assert.Equals("Test Name", String.Copy(_mp3.GetTrackName()));
+        }
+        #endregion
+
+        #region MP3 Get Methods
+        [Test]
         public void GetsAllArtists()
         {
-            
+
         }
+        #endregion
     }
 }
