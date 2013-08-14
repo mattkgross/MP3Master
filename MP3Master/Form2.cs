@@ -16,6 +16,7 @@ namespace MP3Master
     public partial class Form2 : Form
     {
         private MP3File mp3 = null;
+        private Picture albumArt = null;
 
         public Form2()
         {
@@ -78,6 +79,9 @@ namespace MP3Master
             mp3.SetDiscCount(String.IsNullOrEmpty(albumCountTextBox.Text) ? 0 : Convert.ToUInt32(albumCountTextBox.Text));
             mp3.SetGenre(new Genre(genreComboBox.SelectedText));
 
+            if(albumArt != null)
+                mp3.SetAlbumArt(albumArt);
+
             this.Close();
         }
 
@@ -115,12 +119,12 @@ namespace MP3Master
                 {
                     // 1st attempt
                     //Picture pic = new Picture(dialog.FileName);
-                    Picture pic = new Picture(new ByteVector((byte[])new ImageConverter().ConvertTo(Image.FromFile(dialog.FileName), typeof(byte[]))));
-                    mp3.SetAlbumArt(pic);
+                    albumArt = new Picture(new ByteVector((byte[])new ImageConverter().ConvertTo(Image.FromFile(dialog.FileName), typeof(byte[]))));
                     UpdatePic(Image.FromFile(dialog.FileName));
                 }
                 catch (Exception ex)
                 {
+                    albumArt = null;
                     MessageBox.Show(ex.Message, "Album Art Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
