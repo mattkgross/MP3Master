@@ -74,7 +74,7 @@ namespace AttributeSystemProvider
 
         public IPicture GetAlbumArt()
         {
-            return _mediaFile.Tag.Pictures[0];
+            return _mediaFile.Tag.Pictures.Length == 0 ? null : _mediaFile.Tag.Pictures[0];
         }
 
         #endregion
@@ -146,9 +146,9 @@ namespace AttributeSystemProvider
             throw new NotImplementedException();
         }
 
-        public void SetAlbumArt(IPicture photo)
+        public void SetAlbumArt(Picture photo)
         {
-            _mediaFile.Tag.Pictures = new IPicture[1] { photo };
+            _mediaFile.Tag.Pictures = new IPicture[] { photo };
             _mediaFile.Save();
         }
 

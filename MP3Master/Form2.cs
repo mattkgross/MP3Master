@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
+using System.IO;
 
 namespace MP3Master
 {
@@ -50,7 +51,9 @@ namespace MP3Master
 
             if (mp3.GetAlbumArt() != null)
             {
-                UpdatePic();
+                IPicture pic = mp3.GetAlbumArt();
+                MemoryStream ms = new MemoryStream(pic.Data.Data);
+                UpdatePic(Image.FromStream(ms));
             }
         }
 
@@ -99,7 +102,9 @@ namespace MP3Master
         private void albumArtButton_Click(object sender, EventArgs e)
         {
             FileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "JPEG (*.jpeg;*.jpg;*.jpe)|*.jpeg;*.jpg;*.jpe|PNG (*.png)|*.png|All files (*.*)|*.*";
+            // 1st attempt
+            //dialog.Filter = "JPEG (*.jpeg;*.jpg;*.jpe)|*.jpeg;*.jpg;*.jpe|PNG (*.png)|*.png|All files (*.*)|*.*";
+            dialog.Filter = "JPEG (*.jpeg;*.jpg;*.jpe)|*.jpeg;*.jpg;*.jpe";
             dialog.FilterIndex = 3;
             dialog.CheckFileExists = true;
             dialog.RestoreDirectory = true;
@@ -108,7 +113,9 @@ namespace MP3Master
             {
                 try
                 {
-                    IPicture pic = new Picture(dialog.FileName);
+                    // 1st attempt
+                    //Picture pic = new Picture(dialog.FileName);
+                    Picture pic = new Picture(new ByteVector((byte[])new ImageConverter().ConvertTo(Image.FromFile(dialog.FileName), typeof(byte[]))));
                     mp3.SetAlbumArt(pic);
                     UpdatePic(Image.FromFile(dialog.FileName));
                 }
