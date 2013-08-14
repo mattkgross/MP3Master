@@ -17,7 +17,7 @@ namespace MP3UnitTest
         {
             // Create Test Directory w/ Empty File
             _testDir = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Test");
-            _path = Directory.GetCurrentDirectory() + "\\Test\\test.mp3";
+            _path = _testDir + "\\test.mp3";
             File.Create(_path);
             _mp3 = new MP3File(_path);
         }
@@ -33,10 +33,10 @@ namespace MP3UnitTest
         [Test]
         public void SetTrackName_ValidName()
         {
-            var name = "Test Name";
+            string name = "Test Name";
             _mp3.SetTrackName(name);
 
-            NUnit.Framework.Assert.Equals("Test Name", String.Copy(_mp3.GetTrackName()));
+            Assert.Equals(name, _mp3.GetTrackName());
         }
         #endregion
 
