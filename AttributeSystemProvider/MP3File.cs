@@ -24,12 +24,12 @@ namespace AttributeSystemProvider
 
         public List<string> GetArtists()
         {
-            return new List<string>(_mediaFile.Tag.AlbumArtists);
+            return new List<string>(_mediaFile.Tag.Performers);
         }
 
         public string GetFirstArtist()
         {
-            return _mediaFile.Tag.FirstAlbumArtist;
+            return _mediaFile.Tag.FirstPerformer;
         }
 
         public string GetAlbum()
@@ -89,13 +89,13 @@ namespace AttributeSystemProvider
 
         public void SetArtists(string artist)
         {
-            _mediaFile.Tag.AlbumArtists = new string[] { artist };
+            _mediaFile.Tag.Performers = new string[] { artist };
             _mediaFile.Save();
         }
 
         public void SetArtists(List<string> artists)
         {
-            _mediaFile.Tag.AlbumArtists = artists.ToArray();
+            _mediaFile.Tag.Performers = artists.ToArray();
             _mediaFile.Save();
         }
 
