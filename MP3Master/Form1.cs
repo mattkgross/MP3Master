@@ -15,10 +15,10 @@ namespace MP3Master
 {
     public partial class Main_Form : Form
     {
-        private static string exportDirectory;
-        private static string sourceDirectory;
-        private static bool recurseDirectory;
-        private static bool songData;
+        private static string _exportDirectory;
+        private static string _sourceDirectory;
+        private static bool _recurseDirectory;
+        private static bool _songData;
 
         public Main_Form()
         {
@@ -27,7 +27,7 @@ namespace MP3Master
 
         private void Main_Form_Load(object sender, EventArgs e)
         {
-            recurseDirectory = subdirectoryCheckBox.Checked;
+            _recurseDirectory = subdirectoryCheckBox.Checked;
             schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox2.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox3.Items.AddRange(DataEnums.songOptions.Keys.ToArray());
@@ -36,13 +36,13 @@ namespace MP3Master
         #region State Change Handlers
         private void Updater()
         {
-            exportDirectory = exportDirectoryTextBox.Text;
-            sourceDirectory = sourceDirectoryTextBox.Text;
+            _exportDirectory = exportDirectoryTextBox.Text;
+            _sourceDirectory = sourceDirectoryTextBox.Text;
         }
 
         private bool Validater()
         {
-            if (String.IsNullOrEmpty(exportDirectory))
+            if (String.IsNullOrEmpty(_exportDirectory))
             {
                 MessageBox.Show("Please specify a directory to where you would like to export your files.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -54,13 +54,13 @@ namespace MP3Master
                 return false;
             }
 
-            if (String.IsNullOrEmpty(sourceDirectory))
+            if (String.IsNullOrEmpty(_sourceDirectory))
             {
                 MessageBox.Show("Please specify a directory that contains your music files.", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            if (exportDirectory.Equals(sourceDirectory))
+            if (_exportDirectory.Equals(_sourceDirectory))
             {
                 MessageBox.Show("Export and source directory cannot be the same!", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -103,12 +103,12 @@ namespace MP3Master
 
         private void subdirectoryCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            recurseDirectory = subdirectoryCheckBox.Checked;
+            _recurseDirectory = subdirectoryCheckBox.Checked;
         }
 
         private void editTagsBox_CheckedChanged(object sender, EventArgs e)
         {
-            songData = editTagsBox.Checked;
+            _songData = editTagsBox.Checked;
         }
         #endregion
 
@@ -176,7 +176,7 @@ namespace MP3Master
 
         private void StructuredMove(FileInfo file)
         {
-            DirectoryInfo dir = new DirectoryInfo(exportDirectory);
+            DirectoryInfo dir = new DirectoryInfo(_exportDirectory);
             MP3File mp3 = new MP3File(file.FullName);
             
             string schema1 = schemaBox1.Text;
@@ -211,7 +211,7 @@ namespace MP3Master
             if (!Directory.Exists(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2))
                 Directory.CreateDirectory(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2);
 
-            File.Move(file.FullName, exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3));
+            File.Move(file.FullName, _exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3));
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -223,13 +223,13 @@ namespace MP3Master
             musicProgressBar.Visible = true;
 
             List<DirectoryInfo> sourceDirectories;
-            if (recurseDirectory)
+            if (_recurseDirectory)
             {
-                sourceDirectories = recurseDirectoryAdd(sourceDirectory);
+                sourceDirectories = recurseDirectoryAdd(_sourceDirectory);
             }
             else
             {
-                sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(sourceDirectory) };
+                sourceDirectories = new List<DirectoryInfo>() { new DirectoryInfo(_sourceDirectory) };
             }
 
             foreach (var dir in sourceDirectories)
@@ -240,7 +240,7 @@ namespace MP3Master
                         continue;
 
                     // Edit tags if elected
-                    if (songData)
+                    if (_songData)
                         UpdateTags(new MP3File(file.FullName));
 
                     // Move file to destination

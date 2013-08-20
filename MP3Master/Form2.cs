@@ -15,8 +15,8 @@ namespace MP3Master
 {
     public partial class Form2 : Form
     {
-        private MP3File mp3 = null;
-        private Picture albumArt = null;
+        private MP3File _mp3 = null;
+        private Picture _albumArt = null;
 
         public Form2()
         {
@@ -25,13 +25,13 @@ namespace MP3Master
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (mp3 == null)
+            if (_mp3 == null)
             {
                 MessageBox.Show("MP3 file pointer not found.", "MP3 Tag Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
 
-            string name = mp3.GetFile().Name;
+            string name = _mp3.GetFile().Name;
             int start, end;
             start = name.LastIndexOf("\\") + 1;
             end = name.LastIndexOf(".") - start;
@@ -39,20 +39,20 @@ namespace MP3Master
 
 
             // Load Pre-existing data into form
-            trackNameTextBox.Text = mp3.GetTrackName();
-            artistTextBox.Text = mp3.GetFirstArtist();
-            albumTextBox.Text = mp3.GetAlbum();
-            yearTextBox.Text = mp3.GetYear() == 0 ? "" : mp3.GetYear().ToString();
-            trackNumberTextBox.Text = mp3.GetTrackNumber() == 0 ? "" : mp3.GetTrackNumber().ToString();
-            trackCountTextBox.Text = mp3.GetTrackCount() == 0 ? "" : mp3.GetTrackCount().ToString();
-            albumNumberTextBox.Text = mp3.GetDiscNumber() == 0 ? "" : mp3.GetDiscNumber().ToString();
-            albumCountTextBox.Text = mp3.GetDiscCount() == 0 ? "" : mp3.GetDiscCount().ToString();
-            genreComboBox.SelectedText = String.IsNullOrEmpty(mp3.GetGenre()) ? "" : new Genre(mp3.GetGenre()).GetGenre();
+            trackNameTextBox.Text = _mp3.GetTrackName();
+            artistTextBox.Text = _mp3.GetFirstArtist();
+            albumTextBox.Text = _mp3.GetAlbum();
+            yearTextBox.Text = _mp3.GetYear() == 0 ? "" : _mp3.GetYear().ToString();
+            trackNumberTextBox.Text = _mp3.GetTrackNumber() == 0 ? "" : _mp3.GetTrackNumber().ToString();
+            trackCountTextBox.Text = _mp3.GetTrackCount() == 0 ? "" : _mp3.GetTrackCount().ToString();
+            albumNumberTextBox.Text = _mp3.GetDiscNumber() == 0 ? "" : _mp3.GetDiscNumber().ToString();
+            albumCountTextBox.Text = _mp3.GetDiscCount() == 0 ? "" : _mp3.GetDiscCount().ToString();
+            genreComboBox.SelectedText = String.IsNullOrEmpty(_mp3.GetGenre()) ? "" : new Genre(_mp3.GetGenre()).GetGenre();
             genreComboBox.Items.AddRange(DataEnums.genreOptions.Values.ToArray());
 
-            if (mp3.GetAlbumArt() != null)
+            if (_mp3.GetAlbumArt() != null)
             {
-                IPicture pic = mp3.GetAlbumArt();
+                IPicture pic = _mp3.GetAlbumArt();
                 MemoryStream ms = new MemoryStream(pic.Data.Data);
                 UpdatePic(Image.FromStream(ms));
             }
@@ -60,27 +60,27 @@ namespace MP3Master
 
         public void LoadMP3(MP3File file)
         {
-            mp3 = file;
+            _mp3 = file;
         }
 
         private void saveTagsButton_Click(object sender, EventArgs e)
         {
             if (clearOthersCheckBox.Checked)
-                mp3.ClearAllTags();
+                _mp3.ClearAllTags();
 
             // Save Current Data
-            mp3.SetTrackName(trackNameTextBox.Text);
-            mp3.SetArtists(artistTextBox.Text);
-            mp3.SetAlbum(albumTextBox.Text);
-            mp3.SetYear(String.IsNullOrEmpty(yearTextBox.Text) ? 0 : Convert.ToUInt32(yearTextBox.Text));
-            mp3.SetTrackNumber(String.IsNullOrEmpty(trackNumberTextBox.Text) ? 0 : Convert.ToUInt32(trackNumberTextBox.Text));
-            mp3.SetTrackCount(String.IsNullOrEmpty(trackCountTextBox.Text) ? 0 : Convert.ToUInt32(trackCountTextBox.Text));
-            mp3.SetDiscNumber(String.IsNullOrEmpty(albumNumberTextBox.Text) ? 0 : Convert.ToUInt32(albumNumberTextBox.Text));
-            mp3.SetDiscCount(String.IsNullOrEmpty(albumCountTextBox.Text) ? 0 : Convert.ToUInt32(albumCountTextBox.Text));
-            mp3.SetGenre(new Genre(genreComboBox.SelectedText));
+            _mp3.SetTrackName(trackNameTextBox.Text);
+            _mp3.SetArtists(artistTextBox.Text);
+            _mp3.SetAlbum(albumTextBox.Text);
+            _mp3.SetYear(String.IsNullOrEmpty(yearTextBox.Text) ? 0 : Convert.ToUInt32(yearTextBox.Text));
+            _mp3.SetTrackNumber(String.IsNullOrEmpty(trackNumberTextBox.Text) ? 0 : Convert.ToUInt32(trackNumberTextBox.Text));
+            _mp3.SetTrackCount(String.IsNullOrEmpty(trackCountTextBox.Text) ? 0 : Convert.ToUInt32(trackCountTextBox.Text));
+            _mp3.SetDiscNumber(String.IsNullOrEmpty(albumNumberTextBox.Text) ? 0 : Convert.ToUInt32(albumNumberTextBox.Text));
+            _mp3.SetDiscCount(String.IsNullOrEmpty(albumCountTextBox.Text) ? 0 : Convert.ToUInt32(albumCountTextBox.Text));
+            _mp3.SetGenre(new Genre(genreComboBox.SelectedText));
 
-            if(albumArt != null)
-                mp3.SetAlbumArt(albumArt);
+            if(_albumArt != null)
+                _mp3.SetAlbumArt(_albumArt);
 
             this.Close();
         }
@@ -119,12 +119,12 @@ namespace MP3Master
                 {
                     // 1st attempt
                     //Picture pic = new Picture(dialog.FileName);
-                    albumArt = new Picture(new ByteVector((byte[])new ImageConverter().ConvertTo(Image.FromFile(dialog.FileName), typeof(byte[]))));
+                    _albumArt = new Picture(new ByteVector((byte[])new ImageConverter().ConvertTo(Image.FromFile(dialog.FileName), typeof(byte[]))));
                     UpdatePic(Image.FromFile(dialog.FileName));
                 }
                 catch (Exception ex)
                 {
-                    albumArt = null;
+                    _albumArt = null;
                     MessageBox.Show(ex.Message, "Album Art Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
