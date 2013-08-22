@@ -154,6 +154,14 @@ namespace AttributeSystemProvider
 
         #endregion
 
+        #region Delete Methods
+        public void DeleteAlbumArt()
+        {
+            _mediaFile.Tag.Pictures = null;
+            _mediaFile.Save();
+        }
+        #endregion
+
         public void ClearAllTags()
         {
             _mediaFile.Tag.Clear();

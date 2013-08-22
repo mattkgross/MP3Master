@@ -8,7 +8,7 @@ namespace AttributeSystemProvider
 {
     public class DataEnums
     {
-        // Lists all lower case genres and their corrsponding, formatted counterparts
+        // Lists all lower case genres and their corresponding, formatted counterparts
         public static readonly Dictionary<string, string> genreOptions = new Dictionary<string,string> { 
             {"alternative", "Alternative"}, {"books & spoken", "Books & Spoken"}, {"christian", "Christian"},
             {"classical", "Classical"}, {"comedy", "Comedy"}, {"country", "Country"}, {"dance", "Dance"},
