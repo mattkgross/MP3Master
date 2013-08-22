@@ -150,24 +150,27 @@ namespace MP3Master
 
         private string StructureName(string name, MP3File mp3)
         {
+            name = name.Replace(".mp3", "");
             DataEnums.songName type;
             DataEnums.songOptions.TryGetValue(schemaBox3.SelectedItem as string, out type);
 
             switch (type)
             {
                 case DataEnums.songName.Original_Name:
+                    name += ".mp3";
                     break;
                 case DataEnums.songName.Track_Title:
                     uint track = mp3.GetTrackNumber();
                     string part1 = (track == 0) ? "" : (track.ToString() + " - ");
                     string part2 = string.IsNullOrEmpty(mp3.GetTrackName()) ? name : mp3.GetTrackName();
-                    name = part1 + part2;
+                    name = part1 + part2 + ".mp3";
                     break;
                 case DataEnums.songName.Song_Title:
-                    name = string.IsNullOrEmpty(mp3.GetTrackName()) ? name : mp3.GetTrackName();;
+                    name = string.IsNullOrEmpty(mp3.GetTrackName()) ? name : mp3.GetTrackName() + ".mp3";
                     break;
                 default:
                     MessageBox.Show("Song name format type not found. Defaulting to no change.", "Song Name Format Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    name += ".mp3";
                     break;
             }
 
@@ -181,13 +184,14 @@ namespace MP3Master
             
             string schema1 = schemaBox1.Text;
             string schema2 = schemaBox2.Text;
-            string schema3 = schemaBox3.Text;
             string schemaName1 = "";
             string schemaName2 = "";
 
             // Reflect mp3 type
             Type mp3Type = mp3.GetType();
             string temp = "";
+
+            // TODO: If invalid folder character in artist or album, regex and replace with underscore
 
             // Get the function associated with the 1st schema option
             DataEnums.schemaOptions.TryGetValue(schema1, out temp);
