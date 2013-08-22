@@ -77,7 +77,7 @@ namespace MP3Master
             _mp3.SetTrackCount(String.IsNullOrEmpty(trackCountTextBox.Text) ? 0 : Convert.ToUInt32(trackCountTextBox.Text));
             _mp3.SetDiscNumber(String.IsNullOrEmpty(albumNumberTextBox.Text) ? 0 : Convert.ToUInt32(albumNumberTextBox.Text));
             _mp3.SetDiscCount(String.IsNullOrEmpty(albumCountTextBox.Text) ? 0 : Convert.ToUInt32(albumCountTextBox.Text));
-            _mp3.SetGenre(new Genre(genreComboBox.SelectedText));
+            _mp3.SetGenre(new Genre(genreComboBox.SelectedItem.ToString()));
 
             if(_albumArt != null)
                 _mp3.SetAlbumArt(_albumArt);
