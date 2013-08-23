@@ -139,7 +139,9 @@ namespace MP3Master
 
         private void addPlayistButton_Click(object sender, EventArgs e)
         {
-
+            Form3 form3 = new Form3();
+            form3.LoadForm2Components(_mp3);
+            form3.ShowDialog();
         }
     }
 }
