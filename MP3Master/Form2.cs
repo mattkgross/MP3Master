@@ -137,9 +137,9 @@ namespace MP3Master
             albumArtPictureBox.Image = MP3Master.Properties.Resources.noart;
         }
 
-        private void decibelTrackBar_Scroll(object sender, EventArgs e)
+        private void addPlayistButton_Click(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

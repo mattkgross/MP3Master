@@ -52,12 +52,13 @@
             this.albumArtPictureBox = new System.Windows.Forms.PictureBox();
             this.albumArtButton = new System.Windows.Forms.Button();
             this.clearAlbumArtButton = new System.Windows.Forms.Button();
+            this.addPlayistButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.albumArtPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // saveTagsButton
             // 
-            this.saveTagsButton.Location = new System.Drawing.Point(58, 353);
+            this.saveTagsButton.Location = new System.Drawing.Point(58, 401);
             this.saveTagsButton.Name = "saveTagsButton";
             this.saveTagsButton.Size = new System.Drawing.Size(75, 23);
             this.saveTagsButton.TabIndex = 0;
@@ -67,7 +68,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(150, 353);
+            this.closeButton.Location = new System.Drawing.Point(150, 401);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 1;
@@ -80,7 +81,7 @@
             this.clearOthersCheckBox.AutoSize = true;
             this.clearOthersCheckBox.Checked = true;
             this.clearOthersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 327);
+            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 375);
             this.clearOthersCheckBox.Name = "clearOthersCheckBox";
             this.clearOthersCheckBox.Size = new System.Drawing.Size(138, 17);
             this.clearOthersCheckBox.TabIndex = 2;
@@ -271,13 +272,24 @@
             this.clearAlbumArtButton.UseVisualStyleBackColor = true;
             this.clearAlbumArtButton.Click += new System.EventHandler(this.clearAlbumArtButton_Click);
             // 
+            // addPlayistButton
+            // 
+            this.addPlayistButton.Location = new System.Drawing.Point(71, 334);
+            this.addPlayistButton.Name = "addPlayistButton";
+            this.addPlayistButton.Size = new System.Drawing.Size(144, 23);
+            this.addPlayistButton.TabIndex = 24;
+            this.addPlayistButton.Text = "Add Song to iTunes Playlist";
+            this.addPlayistButton.UseVisualStyleBackColor = true;
+            this.addPlayistButton.Click += new System.EventHandler(this.addPlayistButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(284, 389);
+            this.ClientSize = new System.Drawing.Size(284, 432);
             this.ControlBox = false;
+            this.Controls.Add(this.addPlayistButton);
             this.Controls.Add(this.clearAlbumArtButton);
             this.Controls.Add(this.albumArtButton);
             this.Controls.Add(this.albumArtPictureBox);
@@ -338,5 +350,6 @@
         private System.Windows.Forms.PictureBox albumArtPictureBox;
         private System.Windows.Forms.Button albumArtButton;
         private System.Windows.Forms.Button clearAlbumArtButton;
+        private System.Windows.Forms.Button addPlayistButton;
     }
 }
