@@ -136,5 +136,10 @@ namespace MP3Master
             _mp3.DeleteAlbumArt();
             albumArtPictureBox.Image = MP3Master.Properties.Resources.noart;
         }
+
+        private void decibelTrackBar_Scroll(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

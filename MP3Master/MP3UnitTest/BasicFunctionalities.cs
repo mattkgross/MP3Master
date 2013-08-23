@@ -146,13 +146,6 @@ namespace MP3UnitTest
 
         [Test]
         [Category("SetMethods")]
-        public void SetDecibelDefault()
-        {
-            // TODO: Implement test once decibel level is editable
-        }
-
-        [Test]
-        [Category("SetMethods")]
         public void SetAlbumArt()
         {
             var art = new Picture(new ByteVector(DataEnums.jpegEmpty, DataEnums.jpegEmpty.Length));
@@ -256,13 +249,6 @@ namespace MP3UnitTest
             var genre = new Genre("Pop").GetGenre();
 
             Assert.True(String.Equals(genre, _mp3_2.GetGenre()));
-        }
-
-        [Test]
-        [Category("GetMethods")]
-        public void GetDecibelDefault()
-        {
-            // TODO: Implement test once decibel level is editable
         }
 
         [Test]

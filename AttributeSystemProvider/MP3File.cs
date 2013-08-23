@@ -67,11 +67,6 @@ namespace AttributeSystemProvider
             return _mediaFile.Tag.FirstGenre;
         }
 
-        public uint GetDecibel()
-        {
-            throw new NotImplementedException();
-        }
-
         public IPicture GetAlbumArt()
         {
             return _mediaFile.Tag.Pictures.Length == 0 ? null : _mediaFile.Tag.Pictures[0];
@@ -139,11 +134,6 @@ namespace AttributeSystemProvider
         {
             _mediaFile.Tag.Genres = new string[] { genre.GetGenre() };
             _mediaFile.Save();
-        }
-
-        public void SetDecibelDefault()
-        {
-            throw new NotImplementedException();
         }
 
         public void SetAlbumArt(Picture photo)

@@ -52,15 +52,12 @@
             this.albumArtPictureBox = new System.Windows.Forms.PictureBox();
             this.albumArtButton = new System.Windows.Forms.Button();
             this.clearAlbumArtButton = new System.Windows.Forms.Button();
-            this.decibelTrackBar = new System.Windows.Forms.TrackBar();
-            this.decibelLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.albumArtPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.decibelTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // saveTagsButton
             // 
-            this.saveTagsButton.Location = new System.Drawing.Point(58, 448);
+            this.saveTagsButton.Location = new System.Drawing.Point(58, 353);
             this.saveTagsButton.Name = "saveTagsButton";
             this.saveTagsButton.Size = new System.Drawing.Size(75, 23);
             this.saveTagsButton.TabIndex = 0;
@@ -70,7 +67,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(150, 448);
+            this.closeButton.Location = new System.Drawing.Point(150, 353);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 1;
@@ -83,7 +80,7 @@
             this.clearOthersCheckBox.AutoSize = true;
             this.clearOthersCheckBox.Checked = true;
             this.clearOthersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 425);
+            this.clearOthersCheckBox.Location = new System.Drawing.Point(16, 327);
             this.clearOthersCheckBox.Name = "clearOthersCheckBox";
             this.clearOthersCheckBox.Size = new System.Drawing.Size(138, 17);
             this.clearOthersCheckBox.TabIndex = 2;
@@ -247,7 +244,7 @@
             this.albumArtPictureBox.ErrorImage = global::MP3Master.Properties.Resources.noart;
             this.albumArtPictureBox.Image = global::MP3Master.Properties.Resources.noart;
             this.albumArtPictureBox.InitialImage = global::MP3Master.Properties.Resources.noart;
-            this.albumArtPictureBox.Location = new System.Drawing.Point(157, 245);
+            this.albumArtPictureBox.Location = new System.Drawing.Point(157, 229);
             this.albumArtPictureBox.Name = "albumArtPictureBox";
             this.albumArtPictureBox.Size = new System.Drawing.Size(115, 82);
             this.albumArtPictureBox.TabIndex = 21;
@@ -274,31 +271,13 @@
             this.clearAlbumArtButton.UseVisualStyleBackColor = true;
             this.clearAlbumArtButton.Click += new System.EventHandler(this.clearAlbumArtButton_Click);
             // 
-            // decibelTrackBar
-            // 
-            this.decibelTrackBar.Location = new System.Drawing.Point(12, 374);
-            this.decibelTrackBar.Name = "decibelTrackBar";
-            this.decibelTrackBar.Size = new System.Drawing.Size(260, 45);
-            this.decibelTrackBar.TabIndex = 24;
-            // 
-            // decibelLabel
-            // 
-            this.decibelLabel.AutoSize = true;
-            this.decibelLabel.Location = new System.Drawing.Point(16, 355);
-            this.decibelLabel.Name = "decibelLabel";
-            this.decibelLabel.Size = new System.Drawing.Size(74, 13);
-            this.decibelLabel.TabIndex = 25;
-            this.decibelLabel.Text = "Volume Adjust";
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(284, 483);
+            this.ClientSize = new System.Drawing.Size(284, 389);
             this.ControlBox = false;
-            this.Controls.Add(this.decibelLabel);
-            this.Controls.Add(this.decibelTrackBar);
             this.Controls.Add(this.clearAlbumArtButton);
             this.Controls.Add(this.albumArtButton);
             this.Controls.Add(this.albumArtPictureBox);
@@ -328,7 +307,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.albumArtPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.decibelTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,7 +338,5 @@
         private System.Windows.Forms.PictureBox albumArtPictureBox;
         private System.Windows.Forms.Button albumArtButton;
         private System.Windows.Forms.Button clearAlbumArtButton;
-        private System.Windows.Forms.TrackBar decibelTrackBar;
-        private System.Windows.Forms.Label decibelLabel;
     }
 }
