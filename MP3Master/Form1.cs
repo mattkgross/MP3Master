@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTunesLib;
 
 namespace MP3Master
 {
@@ -19,10 +20,12 @@ namespace MP3Master
         private static string _sourceDirectory;
         private static bool _recurseDirectory;
         private static bool _songData;
+        private static iTunesAppClass _itunes;
 
         public Main_Form()
         {
             InitializeComponent();
+            _itunes = new iTunesAppClass();
         }
 
         private void Main_Form_Load(object sender, EventArgs e)
@@ -177,7 +180,7 @@ namespace MP3Master
             return name;
         }
 
-        private void StructuredMove(FileInfo file)
+        private string StructuredMove(FileInfo file)
         {
             DirectoryInfo dir = new DirectoryInfo(_exportDirectory);
             MP3File mp3 = new MP3File(file.FullName);
@@ -215,7 +218,22 @@ namespace MP3Master
             if (!Directory.Exists(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2))
                 Directory.CreateDirectory(dir.FullName + "\\" + schemaName1 + "\\" + schemaName2);
 
-            File.Move(file.FullName, _exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" + StructureName(file.Name, mp3));
+            string finalPath = _exportDirectory + "\\" + schemaName1 + "\\" + schemaName2 + "\\" +
+                               StructureName(file.Name, mp3);
+
+            File.Move(file.FullName, finalPath);
+
+            return finalPath;
+        }
+
+        private void AddToPlaylists(string path)
+        {
+            FileInfo file = new FileInfo(path);
+            MP3File mp3 = new MP3File(path);
+
+            // Check to see if file is already in playlist
+            // TODO: Add to playlists.
+            
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -248,7 +266,10 @@ namespace MP3Master
                         UpdateTags(new MP3File(file.FullName));
 
                     // Move file to destination
-                    StructuredMove(file);
+                    string newPath = StructuredMove(file);
+
+                    // Add file to selected playlists in iTunes
+                    AddToPlaylists(newPath);
                 }
             }
 
