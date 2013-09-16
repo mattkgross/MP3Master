@@ -203,6 +203,8 @@
             // subdirectoryCheckBox
             // 
             this.subdirectoryCheckBox.AutoSize = true;
+            this.subdirectoryCheckBox.Checked = true;
+            this.subdirectoryCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 138);
             this.subdirectoryCheckBox.Name = "subdirectoryCheckBox";
             this.subdirectoryCheckBox.Size = new System.Drawing.Size(131, 17);
@@ -214,6 +216,8 @@
             // editTagsBox
             // 
             this.editTagsBox.AutoSize = true;
+            this.editTagsBox.Checked = true;
+            this.editTagsBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.editTagsBox.Location = new System.Drawing.Point(16, 171);
             this.editTagsBox.Name = "editTagsBox";
             this.editTagsBox.Size = new System.Drawing.Size(221, 17);

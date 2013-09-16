@@ -24,8 +24,9 @@ namespace MP3Master
         private static bool _songData;
         private static iTunesAppClass _itunes;
         private static Process _itunesProcess;
+        private List<IITPlaylist> _playlist;
 
-        #region DLL Imports
+            #region DLL Imports
         // DLL IMPORTS
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -41,7 +42,9 @@ namespace MP3Master
 
         private void Main_Form_Load(object sender, EventArgs e)
         {
+            _playlist = new List<IITPlaylist>();
             _recurseDirectory = subdirectoryCheckBox.Checked;
+            _songData = editTagsBox.Checked;
             schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox2.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox3.Items.AddRange(DataEnums.songOptions.Keys.ToArray());
@@ -183,10 +186,16 @@ namespace MP3Master
         }
         #endregion
 
+        public void SendPlaylist(List<IITPlaylist> list)
+        {
+            _playlist = list;
+        }
+
         private void UpdateTags(MP3File file)
         {
             Form2 form2 = new Form2();
             form2.LoadMP3(file);
+            form2.LoadParent(this);
             form2.ShowDialog();            
         }
 
@@ -271,7 +280,7 @@ namespace MP3Master
             MP3File mp3 = new MP3File(path);
 
             // Check to see if file is already in playlist
-            // TODO: Add to playlists.
+            // TODO: Add to playlists. All playlist selected for the song are stored in _playlists.
             
         }
 

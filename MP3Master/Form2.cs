@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
 using System.IO;
+using iTunesLib;
 
 namespace MP3Master
 {
@@ -17,6 +18,8 @@ namespace MP3Master
     {
         private MP3File _mp3 = null;
         private Picture _albumArt = null;
+        private List<IITPlaylist> _playlists; 
+        private Main_Form _parentForm;
 
         public Form2()
         {
@@ -63,6 +66,16 @@ namespace MP3Master
             _mp3 = file;
         }
 
+        public void setPlaylist(List<IITPlaylist> list)
+        {
+            _playlists = list;
+        }
+
+        public void LoadParent(Main_Form form)
+        {
+            _parentForm = form;
+        }
+
         private void saveTagsButton_Click(object sender, EventArgs e)
         {
             if (clearOthersCheckBox.Checked)
@@ -81,6 +94,8 @@ namespace MP3Master
 
             if(_albumArt != null)
                 _mp3.SetAlbumArt(_albumArt);
+
+            _parentForm.SendPlaylist(_playlists);
 
             this.Close();
         }
@@ -140,7 +155,7 @@ namespace MP3Master
         private void addPlayistButton_Click(object sender, EventArgs e)
         {
             Form3 form3 = new Form3();
-            form3.LoadForm2Components(_mp3);
+            form3.LoadForm2Components(_mp3, this);
             form3.ShowDialog();
         }
     }

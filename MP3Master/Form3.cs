@@ -17,6 +17,7 @@ namespace MP3Master
         private iTunesAppClass _itunes;
         private MP3File _mp3;
         private List<IITPlaylist> _playlists;
+        private Form2 _parentForm;
 
         public Form3()
         {
@@ -31,21 +32,25 @@ namespace MP3Master
             {
                 playlistsListBox.Items.Add(play.Name);
             }
+
+            _playlists = new List<IITPlaylist>();
         }
 
-        public void LoadForm2Components(MP3File file)
+        public void LoadForm2Components(MP3File file, Form2 form)
         {
             _mp3 = file;
+            _parentForm = form;
         }
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            // TODO: Figure out how to pass the _playlists back to form 1 for adding
+            _parentForm.setPlaylist(_playlists);
+            this.Close();
         }
 
         private void helpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Select the playlists you wish to add the song to by holding down CTRL and clicking on those you desire.", "Playlist Selection Help", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            MessageBox.Show("Select the playlists you wish to add the song to by clicking on those listed you desire.", "Playlist Selection Help", MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
 
         private void playlistsListBox_SelectedIndexChanged(object sender, EventArgs e)
