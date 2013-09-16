@@ -71,9 +71,10 @@ namespace MP3Master
             _playlists = list;
         }
 
-        public void LoadParent(Main_Form form)
+        public void LoadParent(Main_Form form, bool iTunesExists)
         {
             _parentForm = form;
+            addPlayistButton.Enabled = iTunesExists;
         }
 
         private void saveTagsButton_Click(object sender, EventArgs e)

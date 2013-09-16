@@ -25,6 +25,7 @@ namespace MP3Master
         private static iTunesAppClass _itunes;
         private static Process _itunesProcess;
         private List<IITPlaylist> _playlist;
+        private bool _iTunesExists;
 
             #region DLL Imports
         // DLL IMPORTS
@@ -50,12 +51,16 @@ namespace MP3Master
             schemaBox3.Items.AddRange(DataEnums.songOptions.Keys.ToArray());
 
             // Minimize iTunes popup if any
-            Process[] boo = Process.GetProcesses();
-            _itunesProcess = Process.GetProcessesByName("iTunes").First();
-
-            if(_itunesProcess != null)
+            Process[] iTunesProcesses = Process.GetProcessesByName("iTunes");
+            if (iTunesProcesses.Count() > 0)
             {
+                _itunesProcess = iTunesProcesses.First();
                 ShowWindow(_itunesProcess.MainWindowHandle, 2);
+                _iTunesExists = true;
+            }
+            else
+            {
+                _iTunesExists = false;
             }
         }
 
@@ -195,7 +200,7 @@ namespace MP3Master
         {
             Form2 form2 = new Form2();
             form2.LoadMP3(file);
-            form2.LoadParent(this);
+            form2.LoadParent(this, _iTunesExists);
             form2.ShowDialog();            
         }
 
