@@ -28,6 +28,8 @@ namespace MP3Master
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            _playlists = new List<IITPlaylist>();
+
             if (_mp3 == null)
             {
                 MessageBox.Show("MP3 file pointer not found.", "MP3 Tag Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
