@@ -16,7 +16,7 @@ namespace MP3Master
     {
         private iTunesAppClass _itunes;
         private MP3File _mp3;
-        private List<IITLibraryPlaylist> _playlists;
+        private List<IITPlaylist> _playlists;
 
         public Form3()
         {
@@ -27,7 +27,7 @@ namespace MP3Master
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            foreach (IITLibraryPlaylist play in _itunes.LibrarySource.Playlists)
+            foreach (IITPlaylist play in _itunes.LibrarySource.Playlists)
             {
                 playlistsListBox.Items.Add(play.Name);
             }

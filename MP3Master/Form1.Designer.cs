@@ -203,14 +203,12 @@
             // subdirectoryCheckBox
             // 
             this.subdirectoryCheckBox.AutoSize = true;
-            this.subdirectoryCheckBox.Enabled = false;
             this.subdirectoryCheckBox.Location = new System.Drawing.Point(292, 138);
             this.subdirectoryCheckBox.Name = "subdirectoryCheckBox";
             this.subdirectoryCheckBox.Size = new System.Drawing.Size(131, 17);
             this.subdirectoryCheckBox.TabIndex = 15;
             this.subdirectoryCheckBox.Text = "Include Subdirectories";
             this.subdirectoryCheckBox.UseVisualStyleBackColor = true;
-            this.subdirectoryCheckBox.Visible = false;
             this.subdirectoryCheckBox.CheckedChanged += new System.EventHandler(this.subdirectoryCheckBox_CheckedChanged);
             // 
             // editTagsBox
@@ -252,6 +250,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MP3 Master";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_Form_FormClosed);
             this.Load += new System.EventHandler(this.Main_Form_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

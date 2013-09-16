@@ -1,4 +1,6 @@
-﻿using AttributeSystemProvider;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
+using AttributeSystemProvider;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +23,16 @@ namespace MP3Master
         private static bool _recurseDirectory;
         private static bool _songData;
         private static iTunesAppClass _itunes;
+        private static Process _itunesProcess;
 
+        #region DLL Imports
+        // DLL IMPORTS
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        #endregion
+
+
+        #region Event Handlers
         public Main_Form()
         {
             InitializeComponent();
@@ -34,7 +45,23 @@ namespace MP3Master
             schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox2.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
             schemaBox3.Items.AddRange(DataEnums.songOptions.Keys.ToArray());
+
+            // Minimize iTunes popup if any
+            Process[] boo = Process.GetProcesses();
+            _itunesProcess = Process.GetProcessesByName("iTunes").First();
+
+            if(_itunesProcess != null)
+            {
+                ShowWindow(_itunesProcess.MainWindowHandle, 2);
+            }
         }
+
+        private void Main_Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (_itunesProcess != null)
+                _itunesProcess.Kill();
+        }
+        #endregion
 
         #region State Change Handlers
         private void Updater()
@@ -134,13 +161,25 @@ namespace MP3Master
 
         private List<DirectoryInfo> recurseDirectoryAdd(string root)
         {
+            List<DirectoryInfo> dirList = new List<DirectoryInfo>();
             DirectoryInfo dirInfo = new DirectoryInfo(root);
 
-            if (dirInfo.EnumerateDirectories().Count() == 0)
-                return new List<DirectoryInfo>() { dirInfo };
+            recurseDirectoryHelper(dirList, dirInfo);
 
-            // stub until recursing correctly
-            return null;
+            return dirList;
+        }
+
+        private void recurseDirectoryHelper(List<DirectoryInfo> list, DirectoryInfo root)
+        {
+            if (root.EnumerateDirectories().Count() == 0)
+            {
+                foreach (var directoryInfo in root.EnumerateDirectories())
+                {
+                    recurseDirectoryHelper(list, directoryInfo);
+                }
+            }
+
+            list.Add(root);
         }
         #endregion
 
