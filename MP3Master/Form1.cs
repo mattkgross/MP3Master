@@ -171,7 +171,7 @@ namespace MP3Master
 
         private void recurseDirectoryHelper(List<DirectoryInfo> list, DirectoryInfo root)
         {
-            if (root.EnumerateDirectories().Count() == 0)
+            if (root.EnumerateDirectories().Count() != 0)
             {
                 foreach (var directoryInfo in root.EnumerateDirectories())
                 {
