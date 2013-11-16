@@ -285,7 +285,7 @@ namespace MP3Master
             MP3File mp3 = new MP3File(path);
 
             // Check to see if file is already in playlist
-            // TODO: Add to playlists. All playlist selected for the song are stored in _playlists.
+            // TODO: Add to playlists. All playlists selected for the song are stored in _playlists.
             
         }
 
