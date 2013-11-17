@@ -274,11 +274,12 @@
             // 
             // addPlayistButton
             // 
+            this.addPlayistButton.Enabled = false;
             this.addPlayistButton.Location = new System.Drawing.Point(71, 334);
             this.addPlayistButton.Name = "addPlayistButton";
             this.addPlayistButton.Size = new System.Drawing.Size(144, 23);
             this.addPlayistButton.TabIndex = 24;
-            this.addPlayistButton.Text = "Add Song to iTunes Playlist";
+            this.addPlayistButton.Text = "Add Song to Spotify Playlist";
             this.addPlayistButton.UseVisualStyleBackColor = true;
             this.addPlayistButton.Click += new System.EventHandler(this.addPlayistButton_Click);
             // 

@@ -8,32 +8,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AttributeSystemProvider;
-using iTunesLib;
 
 namespace MP3Master
 {
     public partial class Form3 : Form
     {
-        private iTunesAppClass _itunes;
+        //private iTunesAppClass _itunes; // player handler
         private MP3File _mp3;
-        private List<IITPlaylist> _playlists;
+        //private List<IITPlaylist> _playlists; // playlist list
         private Form2 _parentForm;
 
         public Form3()
         {
             InitializeComponent();
-            _itunes = new iTunesAppClass();
+            //_itunes = new iTunesAppClass();
             _mp3 = null;
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            foreach (IITPlaylist play in _itunes.LibrarySource.Playlists)
+            /*foreach (IITPlaylist play in _itunes.LibrarySource.Playlists)
             {
                 playlistsListBox.Items.Add(play.Name);
             }
 
-            _playlists = new List<IITPlaylist>();
+            _playlists = new List<IITPlaylist>();*/
         }
 
         public void LoadForm2Components(MP3File file, Form2 form)
@@ -44,7 +43,7 @@ namespace MP3Master
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            _parentForm.setPlaylist(_playlists);
+            //_parentForm.setPlaylist(_playlists);
             this.Close();
         }
 
@@ -55,11 +54,11 @@ namespace MP3Master
 
         private void playlistsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _playlists.Clear();
+            /*_playlists.Clear();
             foreach (var item in playlistsListBox.SelectedItems)
             {
                 _playlists.Add(_itunes.LibrarySource.Playlists.get_ItemByName(item.ToString()));
-            }
+            }*/
         }
     }
 }

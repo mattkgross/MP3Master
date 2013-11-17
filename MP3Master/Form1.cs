@@ -12,7 +12,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iTunesLib;
 
 namespace MP3Master
 {
@@ -22,9 +21,9 @@ namespace MP3Master
         private static string _sourceDirectory;
         private static bool _recurseDirectory;
         private static bool _songData;
-        private static iTunesAppClass _itunes;
+        //private static iTunesAppClass _itunes;
         private static Process _itunesProcess;
-        private List<IITPlaylist> _playlist;
+        //private List<IITPlaylist> _playlist;
         private bool _iTunesExists;
 
             #region DLL Imports
@@ -38,12 +37,12 @@ namespace MP3Master
         public Main_Form()
         {
             InitializeComponent();
-            _itunes = new iTunesAppClass();
+            //_itunes = new iTunesAppClass();
         }
 
         private void Main_Form_Load(object sender, EventArgs e)
         {
-            _playlist = new List<IITPlaylist>();
+            //_playlist = new List<IITPlaylist>();
             _recurseDirectory = subdirectoryCheckBox.Checked;
             _songData = editTagsBox.Checked;
             schemaBox1.Items.AddRange(DataEnums.schemaOptions.Keys.ToArray());
@@ -191,10 +190,10 @@ namespace MP3Master
         }
         #endregion
 
-        public void SendPlaylist(List<IITPlaylist> list)
+        /*public void SendPlaylist(List<IITPlaylist> list)
         {
             _playlist = list;
-        }
+        }*/
 
         private void UpdateTags(MP3File file)
         {

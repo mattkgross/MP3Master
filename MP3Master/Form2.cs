@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagLib;
 using System.IO;
-using iTunesLib;
 
 namespace MP3Master
 {
@@ -18,7 +17,7 @@ namespace MP3Master
     {
         private MP3File _mp3 = null;
         private Picture _albumArt = null;
-        private List<IITPlaylist> _playlists; 
+        //private List<IITPlaylist> _playlists; 
         private Main_Form _parentForm;
 
         public Form2()
@@ -28,7 +27,7 @@ namespace MP3Master
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            _playlists = new List<IITPlaylist>();
+            //_playlists = new List<IITPlaylist>();
 
             if (_mp3 == null)
             {
@@ -68,10 +67,10 @@ namespace MP3Master
             _mp3 = file;
         }
 
-        public void setPlaylist(List<IITPlaylist> list)
+       /* public void setPlaylist(List<IITPlaylist> list)
         {
             _playlists = list;
-        }
+        }*/
 
         public void LoadParent(Main_Form form, bool iTunesExists)
         {
@@ -98,7 +97,7 @@ namespace MP3Master
             if(_albumArt != null)
                 _mp3.SetAlbumArt(_albumArt);
 
-            _parentForm.SendPlaylist(_playlists);
+            //_parentForm.SendPlaylist(_playlists);
 
             this.Close();
         }
